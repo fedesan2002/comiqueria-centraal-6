@@ -56,7 +56,7 @@ class Producto {
 }
 
 
-// Datos iniciales del catálogo.
+
 const productosIniciales = [
     {
         id: 1,
@@ -124,7 +124,7 @@ const productosIniciales = [
 ];
 
 
-// forEach: crea las instancias de Producto.
+
 const catalogo = [];
 
 productosIniciales.forEach(function (datosProducto) {
@@ -148,7 +148,7 @@ function formatearPrecio(valor) {
 }
 
 
-// filter: devuelve los productos de la categoría elegida.
+
 function filtrarProductosPorCategoria(categoria) {
     return catalogo.filter(function (producto) {
         return categoria === "Todos" || producto.categoria === categoria;
@@ -175,7 +175,7 @@ function mostrarCatalogoEnConsola(lista = catalogo) {
 }
 
 
-// some: verifica si queda algún producto con stock.
+
 function hayProductosConStock(lista) {
     return lista.some(function (producto) {
         return producto.stock > 0;
@@ -183,7 +183,7 @@ function hayProductosConStock(lista) {
 }
 
 
-// map: transforma los productos en texto para el simulador.
+
 function obtenerReporteCatalogo(lista) {
     const productosEnTexto = lista
         .map(function (producto) {
@@ -206,7 +206,7 @@ function obtenerReporteCatalogo(lista) {
 }
 
 
-// find: busca un producto puntual por nombre.
+
 function buscarProducto(nombreBuscado, lista = catalogo) {
     const busqueda = nombreBuscado.trim().toLowerCase();
 
@@ -241,7 +241,7 @@ function obtenerProductoPorId(idProducto) {
 }
 
 
-// map: transforma los productos visibles en tarjetas HTML.
+
 function renderizarCatalogo(lista = obtenerCatalogoVisible()) {
     const contenedor = document.getElementById("productosGrid");
 
