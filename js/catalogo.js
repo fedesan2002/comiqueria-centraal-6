@@ -56,7 +56,7 @@ class Producto {
 }
 
 
-// Datos iniciales del catálogo. Cada objeto tiene las propiedades del producto.
+// Datos iniciales del catálogo.
 const productosIniciales = [
     {
         id: 1,
@@ -124,10 +124,10 @@ const productosIniciales = [
 ];
 
 
-// Se recorren los datos para crear las instancias de Producto.
+// forEach: crea las instancias de Producto.
 const catalogo = [];
 
-for (const datosProducto of productosIniciales) {
+productosIniciales.forEach(function (datosProducto) {
     const producto = new Producto(
         datosProducto.id,
         datosProducto.nombre,
@@ -137,7 +137,7 @@ for (const datosProducto of productosIniciales) {
     );
 
     catalogo.push(producto);
-}
+});
 
 
 let categoriaSeleccionada = "Todos";
@@ -148,7 +148,7 @@ function formatearPrecio(valor) {
 }
 
 
-// filter: devuelve los productos de la categoría elegida por el usuario.
+// filter: devuelve los productos de la categoría elegida.
 function filtrarProductosPorCategoria(categoria) {
     return catalogo.filter(function (producto) {
         return categoria === "Todos" || producto.categoria === categoria;
@@ -161,7 +161,29 @@ function obtenerCatalogoVisible() {
 }
 
 
-// map: transforma los productos en un texto para el simulador.
+// forEach: muestra productos en consola.
+function mostrarCatalogoEnConsola(lista = catalogo) {
+    console.log("PRODUCTOS DEL CATÁLOGO");
+
+    lista.forEach(function (producto) {
+        console.log(
+            producto.id + ". " + producto.nombre +
+            " - " + formatearPrecio(producto.precio) +
+            " - Stock: " + producto.stock
+        );
+    });
+}
+
+
+// some: verifica si queda algún producto con stock.
+function hayProductosConStock(lista) {
+    return lista.some(function (producto) {
+        return producto.stock > 0;
+    });
+}
+
+
+// map: transforma los productos en texto para el simulador.
 function obtenerReporteCatalogo(lista) {
     const productosEnTexto = lista
         .map(function (producto) {
@@ -219,7 +241,7 @@ function obtenerProductoPorId(idProducto) {
 }
 
 
-// map: transforma cada producto visible en una tarjeta del catálogo.
+// map: transforma los productos visibles en tarjetas HTML.
 function renderizarCatalogo(lista = obtenerCatalogoVisible()) {
     const contenedor = document.getElementById("productosGrid");
 
@@ -228,6 +250,7 @@ function renderizarCatalogo(lista = obtenerCatalogoVisible()) {
             "<p class=\"empty-catalog\">" +
                 "No hay productos para esta categoría." +
             "</p>";
+
         return;
     }
 
