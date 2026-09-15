@@ -370,6 +370,11 @@ function iniciarSimulador() {
         return;
     }
 
+    if (!hayProductosConStock(productosDisponibles)) {
+        alert("Los productos de esta categoría están sin stock.");
+        return;
+    }
+
     alert("Bienvenido a " + NOMBRE_TIENDA);
 
     const reporte = obtenerReporteCatalogo(productosDisponibles);
@@ -397,6 +402,11 @@ function iniciarSimulador() {
     }
 
     const producto = resultado.producto;
+
+    if (producto.stock === 0) {
+        alert(producto.nombre + " no tiene stock disponible.");
+        return;
+    }
 
     alert(
         producto.nombre + " está disponible.\n" +
@@ -453,6 +463,7 @@ document.addEventListener("DOMContentLoaded", function () {
     actualizarCarrito();
 
     console.log("Catálogo preparado:");
+    mostrarCatalogoEnConsola();
     console.table(catalogo);
 
     document
